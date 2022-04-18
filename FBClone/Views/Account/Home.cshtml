@@ -1,0 +1,42 @@
+﻿@model FBClone.Models.User
+
+@{
+    ViewBag.Title = "Home";
+}
+
+<h2>Home</h2>
+
+<div>
+    <h4> @Session["Name"] </h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Id :
+        </dt>
+
+        <dd>
+            @Session["UserId"]
+        </dd>
+
+        <dt>
+            Email :
+        </dt>
+
+        <dd>
+            @Session["Email"]
+            
+        </dd>
+
+        <dt>
+            Password :
+        </dt>
+        <dd>
+            @Session["Password"]
+        </dd>
+    </dl>
+</div>
+
+<p>
+    
+    @Html.ActionLink("Sign Out", "Login")
+</p>
