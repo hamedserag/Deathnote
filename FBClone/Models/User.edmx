@@ -5,7 +5,38 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="FBCloneModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="LoginViewModel">
+        <EntityType Name="Friends">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="FriendId" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Posts">
+          <Key>
+            <PropertyRef Name="PostId" />
+          </Key>
+          <Property Name="PostId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Details" Type="nvarchar(max)" />
+          <Property Name="Privacy" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="FriendRequests" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ViewModel_Login">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -13,93 +44,54 @@
           <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
-        <EntityType Name="Posts">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Details" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="ImgUrl" Type="nvarchar(max)" />
-          <Property Name="Likes" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <Association Name="FK__Posts__UserId__403A8C7D">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Posts" Type="Self.Posts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Posts">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="FBCloneModelStoreContainer">
-          <EntitySet Name="LoginViewModel" EntityType="Self.LoginViewModel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Friends" EntityType="Self.Friends" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Posts__UserId__403A8C7D" Association="Self.FK__Posts__UserId__403A8C7D">
-            <End Role="User" EntitySet="User" />
-            <End Role="Posts" EntitySet="Posts" />
-          </AssociationSet>
+          <EntitySet Name="ViewModel_Login" EntityType="Self.ViewModel_Login" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FBCloneModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="FBCloneEntities" annotation:LazyLoadingEnabled="true" >
-          <EntitySet Name="Users" EntityType="FBCloneModel.User" />
+          <EntitySet Name="Friends" EntityType="FBCloneModel.Friend" />
           <EntitySet Name="Posts" EntityType="FBCloneModel.Post" />
-          <AssociationSet Name="FK__Posts__UserId__403A8C7D" Association="FBCloneModel.FK__Posts__UserId__403A8C7D">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Post" EntitySet="Posts" />
-          </AssociationSet>
-          <EntitySet Name="LoginViewModels" EntityType="FBCloneModel.LoginViewModel" />
+          <EntitySet Name="Users" EntityType="FBCloneModel.User" />
+          <EntitySet Name="ViewModel_Login" EntityType="FBCloneModel.ViewModel_Login" />
         </EntityContainer>
-        <EntityType Name="User">
+        <EntityType Name="Friend">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Posts" Relationship="FBCloneModel.FK__Posts__UserId__403A8C7D" FromRole="User" ToRole="Post" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="FriendId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Post">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="PostId" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Details" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="ImgUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Likes" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="FBCloneModel.FK__Posts__UserId__403A8C7D" FromRole="Post" ToRole="User" />
+          <Property Name="PostId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Privacy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
         </EntityType>
-        <Association Name="FK__Posts__UserId__403A8C7D">
-          <End Type="FBCloneModel.User" Role="User" Multiplicity="1" />
-          <End Type="FBCloneModel.Post" Role="Post" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Post">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="LoginViewModel">
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FriendRequests" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ViewModel_Login">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -113,30 +105,43 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="FBCloneModelStoreContainer" CdmEntityContainer="FBCloneEntities" >
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="FBCloneModel.User">
-              <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
+          <EntitySetMapping Name="Friends">
+            <EntityTypeMapping TypeName="FBCloneModel.Friend">
+              <MappingFragment StoreEntitySet="Friends">
+                <ScalarProperty Name="FriendId" ColumnName="FriendId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Posts">
             <EntityTypeMapping TypeName="FBCloneModel.Post">
               <MappingFragment StoreEntitySet="Posts">
-                <ScalarProperty Name="Likes" ColumnName="Likes" />
-                <ScalarProperty Name="ImgUrl" ColumnName="ImgUrl" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Privacy" ColumnName="Privacy" />
                 <ScalarProperty Name="Details" ColumnName="Details" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="LoginViewModels">
-            <EntityTypeMapping TypeName="FBCloneModel.LoginViewModel">
-              <MappingFragment StoreEntitySet="LoginViewModel">
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="FBCloneModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="FriendRequests" ColumnName="FriendRequests" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LName" ColumnName="LName" />
+                <ScalarProperty Name="FName" ColumnName="FName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewModel_Login">
+            <EntityTypeMapping TypeName="FBCloneModel.ViewModel_Login">
+              <MappingFragment StoreEntitySet="ViewModel_Login">
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

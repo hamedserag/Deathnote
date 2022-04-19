@@ -1,30 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="FBCloneModelStoreContainer" CdmEntityContainer="FBCloneEntities">
-    <EntitySetMapping Name="Users">
-      <EntityTypeMapping TypeName="FBCloneModel.User">
-        <MappingFragment StoreEntitySet="User">
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
+    <EntitySetMapping Name="Friends">
+      <EntityTypeMapping TypeName="FBCloneModel.Friend">
+        <MappingFragment StoreEntitySet="Friends">
+          <ScalarProperty Name="FriendId" ColumnName="FriendId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Posts">
       <EntityTypeMapping TypeName="FBCloneModel.Post">
         <MappingFragment StoreEntitySet="Posts">
-          <ScalarProperty Name="Likes" ColumnName="Likes" />
-          <ScalarProperty Name="ImgUrl" ColumnName="ImgUrl" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Privacy" ColumnName="Privacy" />
           <ScalarProperty Name="Details" ColumnName="Details" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="PostId" ColumnName="PostId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="LoginViewModels">
-      <EntityTypeMapping TypeName="FBCloneModel.LoginViewModel">
-        <MappingFragment StoreEntitySet="LoginViewModel">
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="FBCloneModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="FriendRequests" ColumnName="FriendRequests" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="LName" ColumnName="LName" />
+          <ScalarProperty Name="FName" ColumnName="FName" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ViewModel_Login">
+      <EntityTypeMapping TypeName="FBCloneModel.ViewModel_Login">
+        <MappingFragment StoreEntitySet="ViewModel_Login">
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Id" ColumnName="Id" />

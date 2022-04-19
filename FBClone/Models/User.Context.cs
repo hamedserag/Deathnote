@@ -25,8 +25,9 @@ namespace FBClone.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Friend> Friends { get; set; }
         public virtual DbSet<Post> Posts { get; set; }
-        public virtual DbSet<LoginViewModel> LoginViewModels { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<ViewModel_Login> ViewModel_Login { get; set; }
     }
 }

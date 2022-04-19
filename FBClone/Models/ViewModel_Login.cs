@@ -12,12 +12,10 @@ namespace FBClone.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Post
+    public partial class ViewModel_Login
     {
-        public int PostId { get; set; }
-        public Nullable<int> UserId { get; set; }
-        public string Details { get; set; }
-        public string Privacy { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
+        public int Id { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
     }
 }

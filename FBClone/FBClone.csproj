@@ -133,7 +133,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\LoginViewModel.cs">
+    <Compile Include="Models\Friend.cs">
       <DependentUpon>User.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Post.cs">
@@ -155,6 +155,9 @@
     <Compile Include="Models\User1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>User.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewModel_Login.cs">
       <DependentUpon>User.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -212,11 +215,11 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\Home.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\List.cshtml" />
     <Content Include="Views\Account\SignUp.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Post.cshtml" />
+    <Content Include="Views\Account\Home.cshtml" />
+    <Content Include="Views\Account\ChangeImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

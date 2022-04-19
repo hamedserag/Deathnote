@@ -46,14 +46,15 @@ namespace FBClone.Controllers
             FBCloneEntities db = new FBCloneEntities();
             db.Users.Add(user);
             db.SaveChanges();
-            return View();
+            SaveUserSession(user);
+            return RedirectToAction("Home");
         }
         public ActionResult Login()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult Login(LoginViewModel user)
+        public ActionResult Login(ViewModel_Login user)
         {
             FBCloneEntities db = new FBCloneEntities();
 
@@ -66,10 +67,7 @@ namespace FBClone.Controllers
                     u = users[i];
                 }
             }
-            Session["Name"] = u.Name;
-            Session["Email"] = u.Email;
-            Session["UserId"] = u.Id;
-            Session["Password"] = u.Password;
+            SaveUserSession(u);
             return RedirectToAction("Home");
         }
         public ActionResult List()
@@ -77,6 +75,24 @@ namespace FBClone.Controllers
             FBCloneEntities db = new FBCloneEntities();
             List<User> users = db.Users.ToList();
             return View(users);
+        }
+
+        public ActionResult ChangeImage()
+        {
+            return View();
+        }
+
+        public void SaveUserSession(User u)
+        {
+            Session["FName"] = u.FName;
+            Session["LName"] = u.LName;
+            Session["City"] = u.City;
+            Session["Country"] = u.Country;
+            Session["Email"] = u.Email;
+            Session["Mobile"] = u.Mobile;
+            Session["FriendRequests"] = u.FriendRequests;
+            Session["UserId"] = u.UserId;
+            Session["Password"] = u.Password;
         }
     }
 }

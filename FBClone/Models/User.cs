@@ -14,18 +14,15 @@ namespace FBClone.Models
     
     public partial class User
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
-        {
-            this.Posts = new HashSet<Post>();
-        }
-    
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Password { get; set; }
+        public int UserId { get; set; }
+        public string FName { get; set; }
+        public string LName { get; set; }
         public string Email { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Post> Posts { get; set; }
+        public string Password { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
+        public string Mobile { get; set; }
+        public string FriendRequests { get; set; }
+        public string ImgUrl { get; set; }
     }
 }
