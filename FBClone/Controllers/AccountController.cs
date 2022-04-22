@@ -76,6 +76,14 @@ namespace FBClone.Controllers
             List<User> users = db.Users.ToList();
             return View(users);
         }
+        public ActionResult Search()
+        {
+            return View();
+        }
+        public ActionResult UserProfile(User u)
+        {
+            return View(u);
+        }
 
         public ActionResult ChangeImage()
         {

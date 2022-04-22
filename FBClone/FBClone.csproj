@@ -220,6 +220,7 @@
     <Content Include="Views\Account\SignUp.cshtml" />
     <Content Include="Views\Account\Home.cshtml" />
     <Content Include="Views\Account\ChangeImage.cshtml" />
+    <Content Include="Views\Account\UserProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
