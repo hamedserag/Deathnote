@@ -5,10 +5,10 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="2607035066374785a294596ca221df8a" Name="Diagram1" >
-        <EntityTypeShape EntityType="FBCloneModel.Friend" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="FBCloneModel.Post" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="FBCloneModel.User" Width="1.5" PointX="0.75" PointY="3.75" />
-        <EntityTypeShape EntityType="FBCloneModel.ViewModel_Login" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="FBCloneModel.Friend" Width="1.5" PointX="0.875" PointY="0.5" />
+        <EntityTypeShape EntityType="FBCloneModel.Post" Width="1.5" PointX="2.875" PointY="0.5" />
+        <EntityTypeShape EntityType="FBCloneModel.User" Width="1.5" PointX="0.75" PointY="2.375" />
+        <EntityTypeShape EntityType="FBCloneModel.ViewModel_Login" Width="1.5" PointX="2.875" PointY="3.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

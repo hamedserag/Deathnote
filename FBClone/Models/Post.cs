@@ -17,7 +17,7 @@ namespace FBClone.Models
         public int PostId { get; set; }
         public Nullable<int> UserId { get; set; }
         public string Details { get; set; }
-        public string Privacy { get; set; }
+        public Nullable<int> Privacy { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
     }
 }

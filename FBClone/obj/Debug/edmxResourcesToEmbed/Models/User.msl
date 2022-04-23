@@ -23,6 +23,8 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="FBCloneModel.User">
         <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="Privacy" ColumnName="Privacy" />
+          <ScalarProperty Name="ImgUrl" ColumnName="ImgUrl" />
           <ScalarProperty Name="FriendRequests" ColumnName="FriendRequests" />
           <ScalarProperty Name="Mobile" ColumnName="Mobile" />
           <ScalarProperty Name="Country" ColumnName="Country" />

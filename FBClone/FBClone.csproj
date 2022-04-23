@@ -221,6 +221,11 @@
     <Content Include="Views\Account\Home.cshtml" />
     <Content Include="Views\Account\ChangeImage.cshtml" />
     <Content Include="Views\Account\UserProfile.cshtml" />
+    <Content Include="Views\Account\Search.cshtml" />
+    <Content Include="Views\Account\ShowFriendReqs.cshtml" />
+    <Content Include="Views\Account\ShowFriends.cshtml" />
+    <Content Include="Views\Account\Post.cshtml" />
+    <Content Include="Views\Account\ShowPosts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

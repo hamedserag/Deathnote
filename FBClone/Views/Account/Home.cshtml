@@ -5,7 +5,7 @@
 }
 
 <h2>Home</h2>
-
+<img width="200" height="200" src="~/UsersMedia/ProfilePictures/@Session["UserImg"] " alt="Alternate Text" />
 <div>
     <div>
         @Html.ActionLink("change img", "ChangeImage")
@@ -82,7 +82,28 @@
         </dt>
 
         <dd>
-            @Session["FriendRequests"]
+            <a href="/Account/ShowFriendReqs">Show</a>
+        </dd>
+        <dt>
+            Friends
+        </dt>
+
+        <dd>
+            <a href="/Account/ShowFriends">Show</a>
+        </dd>
+
+        <dt>
+            Post Privacy
+        </dt>
+
+        <dd>
+            <span>
+                @if ((int)Session["PostPrivacy"] == 1)
+                {<span>Friends</span> }
+                else
+                { <span>Only Me</span>}
+            </span>
+            <a href="/Account/PostPrivacy">Change</a>
         </dd>
 
     </dl>

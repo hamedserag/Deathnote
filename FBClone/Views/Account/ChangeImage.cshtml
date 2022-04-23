@@ -1,73 +1,15 @@
 ﻿@model FBClone.Models.User
 
-@{
-    ViewBag.Title = "ChangeImage";
-
-    WebImage photo = null;
-    var newFileName = "";
-    var imagePath = "";
-
-    if (IsPost)
-    {
-        photo = WebImage.GetImageFromRequest();
-
-        if (photo != null)
-        {
-            newFileName = Guid.NewGuid().ToString() + "_" +
-               Path.GetFileName(photo.FileName);
-            imagePath = @"UsersMedia/ProfilePictures/" + newFileName;
-            photo.Save(@"~/" + imagePath);
-        }
-    }
-}
-
 <h2>ChangeImage</h2>
 
+<form action="ChangeImage" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <input type="file" name="img" value="file" />
+        <button class="col col-10 login_btn" type="submit">Change Photo</button>
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ImgUrl, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ImgUrl, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ImgUrl, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
     </div>
-}
-
-
-<body>
-    <form action="" method="post" enctype="multipart/form-data">
-
-        <fieldset>
-            <legend> Upload Image </legend>
-            <label for="Image">Image</label>
-            <input type="file" name="Image" size="35" />
-            <br />
-            <input type="submit" value="Upload" />
-        </fieldset>
-
-    </form>
-    <h1>Uploaded Image</h1>
-
-    @if (imagePath != "") 
-    {
-        <div class="result"><img src="@imagePath" alt="image" /></div>
-    }
-    <img name ="Pathname"src="F:\ASP.NET projects\FBClone\BreadZ\zoz.jpg" alt="Alternate Text" />
-</body>
-
+    @ViewBag.error
+</form>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

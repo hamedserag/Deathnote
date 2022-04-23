@@ -11,10 +11,10 @@
     <Key>
       <PropertyRef Name="PostId" />
     </Key>
-    <Property Name="PostId" Type="int" Nullable="false" />
+    <Property Name="PostId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserId" Type="int" />
     <Property Name="Details" Type="nvarchar(max)" />
-    <Property Name="Privacy" Type="nvarchar" MaxLength="50" />
+    <Property Name="Privacy" Type="int" />
     <Property Name="Date" Type="datetime" />
   </EntityType>
   <EntityType Name="User">
@@ -30,6 +30,8 @@
     <Property Name="Country" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Mobile" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="FriendRequests" Type="nvarchar(max)" />
+    <Property Name="ImgUrl" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Privacy" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ViewModel_Login">
     <Key>

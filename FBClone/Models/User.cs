@@ -24,5 +24,6 @@ namespace FBClone.Models
         public string Mobile { get; set; }
         public string FriendRequests { get; set; }
         public string ImgUrl { get; set; }
+        public int Privacy { get; set; }
     }
 }

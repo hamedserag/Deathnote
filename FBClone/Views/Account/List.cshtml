@@ -38,6 +38,9 @@
         <th>
             @Html.DisplayNameFor(model => model.FriendRequests)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImgUrl)
+        </th>
         <th></th>
     </tr>
 
@@ -69,6 +72,9 @@
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.FriendRequests)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ImgUrl)
     </td>
     <td>
         @Html.ActionLink("Edit", "Edit", new { id = item.UserId }) |
