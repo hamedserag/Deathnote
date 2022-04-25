@@ -3,108 +3,155 @@
 @{
     ViewBag.Title = "Home";
 }
+<style>
+    .timeline {
+        object-fit: cover;
+        height: 80%;
+        width: 100%;
+        border-radius: 0% 100% 45% 55% / 45% 0% 100% 55%;
+    }
 
-<h2>Home</h2>
-<img width="200" height="200" src="~/UsersMedia/ProfilePictures/@Session["UserImg"] " alt="Alternate Text" />
-<div>
-    <div>
-        @Html.ActionLink("change img", "ChangeImage")
+    .profile {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 50%;
+        position: relative;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        border:2px solid #fff;
+    }
+
+        .profile:hover {
+            transition: 0.5s;
+            opacity: 0.7;
+            background: #fff;
+        }
+
+    .UserHolder {
+        width: 100vw;
+        height: 500px;
+    }
+
+    .container-fluid {
+        padding: 0;
+        justify-content: center;
+    }
+    .UserData{
+        
+    }
+    .section {
+        border-radius: 10px;
+        border: 2px solid #fff;
+    }
+</style>
+<div class="UserHolder row justify-content-center">
+    <img class="timeline" src="~/UsersMedia/ProfilePictures/@Session["TimelineImg"] " alt="Alternate Text" />
+    <a href="/Account/ChangeImage"> <img class="profile" src="~/UsersMedia/ProfilePictures/@Session["UserImg"] " alt="Alternate Text" /> </a>
+</div>
+<div class="row pt-5">
+    <div class="section UserData col-sm-4 col-sm-offset-4">
+        <h4>@Session["FName"] @Session["LName"]</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.UserId)
+            </dt>
+
+            <dd>
+                @Session["UserId"]
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.FName)
+            </dt>
+
+            <dd>
+                @Session["FName"]
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LName)
+            </dt>
+
+            <dd>
+                @Session["LName"]
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Session["Email"]
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Password)
+            </dt>
+
+            <dd>
+                @Session["Password"]
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.City)
+            </dt>
+
+            <dd>
+                @Session["City"]
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Country)
+            </dt>
+
+            <dd>
+                @Session["Country"]
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Mobile)
+            </dt>
+
+            <dd>
+                @Session["Mobile"]
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FriendRequests)
+            </dt>
+
+            <dd>
+                <a href="/Account/ShowFriendReqs">Show</a>
+            </dd>
+            <dt>
+                Friends
+            </dt>
+
+            <dd>
+                <a href="/Account/ShowFriends">Show</a>
+            </dd>
+
+            <dt>
+                Post Privacy
+            </dt>
+
+            <dd>
+                <span>
+                    @if ((int)Session["PostPrivacy"] == 1)
+                    {<span>Friends</span> }
+                    else
+                    { <span>Only Me</span>}
+                </span>
+                <a href="/Account/PostPrivacy">Change</a>
+            </dd>
+
+        </dl>
     </div>
 
-    <h4>Hello @Session["FName"] @Session["LName"]</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
-
-        <dd>
-            @Session["UserId"]
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.FName)
-        </dt>
-
-        <dd>
-            @Session["FName"]
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LName)
-        </dt>
-
-        <dd>
-            @Session["LName"]
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Session["Email"]
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-
-        <dd>
-            @Session["Password"]
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-
-        <dd>
-            @Session["City"]
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Country)
-        </dt>
-
-        <dd>
-            @Session["Country"]
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Mobile)
-        </dt>
-
-        <dd>
-            @Session["Mobile"]
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FriendRequests)
-        </dt>
-
-        <dd>
-            <a href="/Account/ShowFriendReqs">Show</a>
-        </dd>
-        <dt>
-            Friends
-        </dt>
-
-        <dd>
-            <a href="/Account/ShowFriends">Show</a>
-        </dd>
-
-        <dt>
-            Post Privacy
-        </dt>
-
-        <dd>
-            <span>
-                @if ((int)Session["PostPrivacy"] == 1)
-                {<span>Friends</span> }
-                else
-                { <span>Only Me</span>}
-            </span>
-            <a href="/Account/PostPrivacy">Change</a>
-        </dd>
-
-    </dl>
+</div>
+<div class="row mt-4">
+    <div class=" py-3 section col-sm-4 col-sm-offset-4">
+        @Html.Partial("Post")
+    </div>
 </div>

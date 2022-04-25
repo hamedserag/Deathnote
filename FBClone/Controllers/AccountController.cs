@@ -67,15 +67,23 @@ namespace FBClone.Controllers
         [HttpPost]
         public ActionResult SignUp(User user)
         {
-            FBCloneEntities db = new FBCloneEntities();
-            db.Users.Add(user);
-            db.SaveChanges();
-            Friend f = new Friend();
-            f.UserId = user.UserId;
-            f.FriendId = null;
-            db.Friends.Add(f);
-            SaveUserSession(user);
-            return RedirectToAction("Home");
+            if (ModelState.IsValid && user.FName != null && user.LName != null && user.Email != null)
+            {
+                FBCloneEntities db = new FBCloneEntities();
+                db.Users.Add(user);
+                db.SaveChanges();
+                Friend f = new Friend();
+                f.UserId = user.UserId;
+                f.FriendId = null;
+                db.Friends.Add(f);
+                SaveUserSession(user);
+                return RedirectToAction("Home");
+            }
+            else
+            {
+                ViewBag.error = "Something went wrong";
+                return View();
+            }
         }
         //LOGIN USER --------------------------------
         public ActionResult Login()
@@ -97,7 +105,16 @@ namespace FBClone.Controllers
                 }
             }
             SaveUserSession(u);
-            return RedirectToAction("Home");
+            if (u.UserId != 0)
+            {
+                return RedirectToAction("Home");
+            }
+            else
+            {
+                ViewBag.error = "Something went wrong";
+                return View();
+            }
+            
         }
 
         //SEARCH AND VIEW OTHER USERS --------------------------------
@@ -244,6 +261,7 @@ namespace FBClone.Controllers
                 User u = db.Users.Where(n => n.UserId == userid).FirstOrDefault();
                 u.ImgUrl = img.FileName;
                 db.SaveChanges();
+                SaveUserSession(u);
 
                 ViewBag.error = "Success " + userid + " IMG URL "+u.ImgUrl ;
                 return RedirectToAction("Home");
@@ -271,6 +289,7 @@ namespace FBClone.Controllers
             Session["Password"] = u.Password;
             Session["UserImg"] = u.ImgUrl;
             Session["PostPrivacy"] = u.Privacy;
+            Session["TimelineImg"] = u.TimelineUrl;
         }
 
         //EXTRA FUNCTIONS --------------------------------

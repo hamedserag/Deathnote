@@ -38,6 +38,7 @@
     <Property Name="FriendRequests" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="ImgUrl" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Privacy" Type="Int32" Nullable="false" />
+    <Property Name="TimelineUrl" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="ViewModel_Login">
     <Key>

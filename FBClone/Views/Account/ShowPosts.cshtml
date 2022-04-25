@@ -1,8 +1,10 @@
 ﻿@model IEnumerable<FBClone.Models.Post>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div class="row mt-4">
+    <div class=" py-3 section col-sm-4 col-sm-offset-4">
+        @Html.Partial("Post")
+    </div>
+</div>
 <table class="table">
     <tr>
         <th>

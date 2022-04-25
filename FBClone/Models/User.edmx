@@ -37,6 +37,7 @@
           <Property Name="FriendRequests" Type="nvarchar(max)" />
           <Property Name="ImgUrl" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Privacy" Type="int" Nullable="false" />
+          <Property Name="TimelineUrl" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="ViewModel_Login">
           <Key>
@@ -94,6 +95,7 @@
           <Property Name="FriendRequests" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ImgUrl" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Privacy" Type="Int32" Nullable="false" />
+          <Property Name="TimelineUrl" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ViewModel_Login">
           <Key>
@@ -131,6 +133,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="FBCloneModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="TimelineUrl" ColumnName="TimelineUrl" />
                 <ScalarProperty Name="Privacy" ColumnName="Privacy" />
                 <ScalarProperty Name="ImgUrl" ColumnName="ImgUrl" />
                 <ScalarProperty Name="FriendRequests" ColumnName="FriendRequests" />

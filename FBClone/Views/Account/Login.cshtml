@@ -13,7 +13,8 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>ViewModel_Login</h4>
+        <h4>Dive in</h4>
+        <h6>@ViewBag.error</h6>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -38,6 +39,7 @@
                 <input type="submit" value="Login" class="btn btn-default" />
             </div>
         </div>
+        <p>Don't have an account? @Html.ActionLink("Sign up here", "SignUp", "Account")</p>
     </div>
 }
 

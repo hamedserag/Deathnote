@@ -32,6 +32,7 @@
     <Property Name="FriendRequests" Type="nvarchar(max)" />
     <Property Name="ImgUrl" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Privacy" Type="int" Nullable="false" />
+    <Property Name="TimelineUrl" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="ViewModel_Login">
     <Key>

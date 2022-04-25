@@ -1,11 +1,11 @@
 ﻿@model FBClone.Models.User
 
-<h2>ChangeImage</h2>
+<h2 class="text-center">ChangeImage</h2>
 
 <form action="ChangeImage" method="post" enctype="multipart/form-data">
-    <div class="row">
-        <input type="file" name="img" value="file" />
-        <button class="col col-10 login_btn" type="submit">Change Photo</button>
+    <div class="row justify-content-center">
+        <input class="col-2" type="file" name="img" value="file" />
+        <button class="buttonDefault btn col-2 login_btn" type="submit">Change Photo</button>
 
     </div>
     @ViewBag.error
