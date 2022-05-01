@@ -1,65 +1,44 @@
 ﻿@model FBClone.Models.User
 
-@{
-    ViewBag.Title = "UserProfile";
-}
+<style>
+    .profile {
+        width: 100%;
+        border-radius: 8px;
+    }
 
-<h2>UserProfile</h2>
-<img width="200" height="200" src="~/UsersMedia/ProfilePictures/@Html.DisplayFor(model => model.ImgUrl) " alt="Alternate Text" />
-<div>
-    <h4>@Html.DisplayFor(model => model.FName) @Html.DisplayFor(model => model.LName)</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FName)
-        </dt>
+    .profileIcon {
+        width: 30px;
+        height: auto;
+        margin-right: 5px;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.FName)
-        </dd>
+    .profileData p {
+        word-break: break-all;
+    }
+</style>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.City)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Country)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Country)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Mobile)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Mobile)
-        </dd>
-
-    </dl>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-3">
+            <div class="col-12">
+                <a href="/Account/ChangeImage"> <img class="profile" src="~/UsersMedia/ProfilePictures/@Model.ImgUrl " alt="Alternate Text" /> </a>
+            </div>
+            <button class="col-12 my-3 lightBtn"> Edit </button>
+            <div class="col-12 mt-3 profileData">
+                <p><img class="profileIcon" src="~/Media/name.png" alt="Name" /> @Model.FName @Model.LName</p>
+                <p><img class="profileIcon" src="~/Media/city.png" alt="Place" /> @Model.Country, @Model.City</p>
+                <p><img class="profileIcon" src="~/Media/mobile.png" alt="Mobile" /> @Model.Mobile</p>
+                <p><img class="profileIcon" src="~/Media/mail.png" alt="Mail" /> @Model.Email</p>
+            </div>
+        </div>
+        <div class="col-8 offset-1">
+            <div class="col-12 mt-5" id="ShowPosts">
+                @Html.Action("ShowUserProfilePosts", "Account")
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Send Friend Request", "SendReq", new { id = Model.UserId }) |
-</p>
+<script>
+
+</script>
+

@@ -1,0 +1,89 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+}
+
+.mainBody {
+    overflow-x: hidden;
+}
+
+body {
+    background: #1C1C1E;
+}
+
+footer {
+ 
+}
+
+    footer p {
+        text-align: center;
+    }
+
+.navbar {
+    border-radius: 0 0 20px 20px;
+    border: none;
+}
+
+.lightInput {
+    padding: 8px 10px;
+    color: #1C1C1E;
+    border-radius: 8px;
+    border: none;
+    background: #F2F2F7;
+    max-width:none;
+}
+
+.lightBtn {
+    background: #F2F2F7;
+    color: #000;
+    border-radius: 8px;
+    border: none;
+    padding: 8px 10px;
+}
+
+    .lightBtn:hover {
+        color: #000;
+    }
+
+.darkInput {
+    padding: 8px 10px;
+    color: #F2F2F7;
+    border-radius: 8px;
+    border: none;
+    background: #1c1c1e;
+    max-width: none;
+}
+.darkBtn {
+    background: #1C1C1E;
+    color: #fff;
+    border-radius: 8px;
+    border: none;
+    padding: 8px 10px;
+}
+
+    .darkBtn:hover {
+        color: #fff;
+    }
+
+.darkTxt {
+    color: #1c1c1c;
+}
+
+.logo {
+    width: 50px;
+    height: auto;
+}
+
+.smallImg {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+}

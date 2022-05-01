@@ -1,0 +1,52 @@
+﻿/*Login*/
+.login {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 90%;
+}
+
+.loginImg {
+    width: 80%;
+    height: auto;
+    object-fit: cover;
+}
+
+.loginInputs, .loginBtn, .loginText {
+    position: relative;
+    left: 10%;
+    width: 80%;
+    max-width: none;
+}
+
+.loginFormContent {
+    background: #fff;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 600px;
+    margin-left:auto;
+}
+
+.loginText {
+    color: #878787;
+}
+
+    .loginText a {
+        color: #1C1C1E;
+        text-align: center;
+    }
+
+        .loginText a:hover {
+            text-decoration: none;
+            color: #000;
+            padding: 0 8px;
+            transition: 0.5s;
+        }
+/*Register*/
+.regInput{
+    width:100%;
+    max-width: none;
+}
+
+

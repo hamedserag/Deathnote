@@ -1,47 +1,57 @@
 ﻿@model IEnumerable<FBClone.Models.Post>
+<style>
+    .post {
+        background: #2C2C2E;
+        border-radius: 8px;
+    }
 
-<div class="row mt-4">
-    <div class=" py-3 section col-sm-4 col-sm-offset-4">
-        @Html.Partial("Post")
-    </div>
-</div>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.UserId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Details)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Privacy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th></th>
-    </tr>
+    .postIcon {
+        width: 30%;
+    }
+    .postControl {
+        display: grid;
+        place-items: center;
+    }
+    .postDetails{
+        word-break:break-all;
+    }
+</style>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserId)
-        </td>
-        <td>
+@foreach (var item in Model)
+{
+    <div class="row post px-5 py-3 mt-3">
+
+        <div class="row justify-content-around py-4 px-2 postContent">
+            <div class="col-1">
+                <img class="smallImg" src="~/UsersMedia/ProfilePictures/@Session["UserImg"]" alt="Alternate Text" />
+            </div>
+            <div class="col-10 d-flex align-items-center">
+                <div class="input-group d-flex">
+                    <h4>@Session["FName"] @Session["LName"]</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row postDetails">
             @Html.DisplayFor(modelItem => item.Details)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Privacy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PostId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PostId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PostId })
-        </td>
-    </tr>
+        </div>
+        <div class="row">
+            <p class="text-right" style="color:#87878A;"> @Html.DisplayFor(modelItem => item.Date) </p>
+            <hr />
+        </div>
+        <div class="row justify-content-around">
+            <div class="col-2 postControl">
+                <img class="postIcon" src="~/Media/apple.png" alt="" />
+                <p>Give Apple</p>
+            </div>
+            <div class="col-2 postControl">
+                <img class="postIcon" src="~/Media/comment.png" alt="" />
+                <p>Comment</p>
+            </div>
+            <div class="col-2 postControl">
+                <img class="postIcon" src="~/Media/writename.png" alt="" />
+                <p>Write Name</p>
+            </div>
+        </div>
+    </div>
 }
 
-</table>

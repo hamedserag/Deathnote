@@ -22,9 +22,8 @@ namespace FBClone.Models
         public string City { get; set; }
         public string Country { get; set; }
         public string Mobile { get; set; }
-        public string FriendRequests { get; set; }
         public string ImgUrl { get; set; }
         public int Privacy { get; set; }
-        public string TimelineUrl { get; set; }
+        public int Status { get; set; }
     }
 }

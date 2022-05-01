@@ -1,0 +1,71 @@
+﻿@model IEnumerable<FBClone.Models.Post>
+@{
+    var friendsUsers = (FBClone.Models.User[])TempData["friendsUsers"];
+
+    var dict = new Dictionary<int, FBClone.Models.User>();
+    for (int i = 0; i < friendsUsers.Length; i++)
+    {
+        dict.Add(friendsUsers[i].UserId, friendsUsers[i]);
+    }
+}
+<style>
+    .post {
+        background: #2C2C2E;
+        border-radius: 8px;
+    }
+
+    .postIcon {
+        width: 30%;
+    }
+
+    .postControl {
+        display: grid;
+        place-items: center;
+    }
+
+    .postDetails {
+        word-break: break-all;
+    }
+</style>
+
+<div class="container px-5 mt-5">
+    @foreach (var item in Model)
+    {
+        <div class="row post px-5 py-3 mt-3">
+
+            <div class="row justify-content-around py-4 px-2 postContent">
+                <div class="col-1">
+                    <img class="smallImg" src="~/UsersMedia/ProfilePictures/@dict[(int)item.UserId].ImgUrl" alt="User Img" />
+                </div>
+                <div class="col-10 d-flex align-items-center">
+                    <div class="input-group d-flex">
+                        <h4>@dict[(int)item.UserId].FName @dict[(int)item.UserId].LName</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row postDetails">
+                @Html.DisplayFor(modelItem => item.Details)
+            </div>
+            <div class="row">
+                <p class="text-right" style="color:#87878A;"> @Html.DisplayFor(modelItem => item.Date) </p>
+                <hr />
+            </div>
+            <div class="row justify-content-around">
+                <div class="col-2 postControl">
+                    <img class="postIcon" src="~/Media/apple.png" alt="" />
+                    <p>Give Apple</p>
+                </div>
+                <div class="col-2 postControl">
+                    <img class="postIcon" src="~/Media/comment.png" alt="" />
+                    <p>Comment</p>
+                </div>
+                <div class="col-2 postControl">
+                    <img class="postIcon" src="~/Media/writename.png" alt="" />
+                    <p>Write Name</p>
+                </div>
+            </div>
+        </div>
+    }
+
+
+</div>

@@ -5,50 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deathnote</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @Styles.Render("~/Content/global.css")
-    <!-- CSS only -->
+    <link href="~/Content/Style/global.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container d-inline">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @if (Session["UserId"] == null)
-                {
-                    @Html.ActionLink("Deathnote", "Login", "Account", new { area = "" }, new { @class = "navbar-brand" })
-                }
-                else
-                {
-                    @Html.ActionLink("Deathnote", "Home", "Account", new { area = "" }, new { @class = "navbar-brand" })
-                }
+    @if (Session["UserId"] != null)
+    {
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container d-inline">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <img src="~/Media/Logo.png" class="logo" alt="Alternate Text" />
 
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav d-inline">
-                    @if (Session["UserId"] == null)
-                    {
-                        <li>@Html.ActionLink("Login", "Login", "Account")</li>
-                        <li>@Html.ActionLink("Register", "SignUp", "Account")</li>
-                    }
-                    else
-                    {
-                        <li>@Html.ActionLink("Home", "Home", "Account")</li>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav d-inline">
+
+                        <li>@Html.ActionLink("Profile", "Home", "Account")</li>
+                        <li>@Html.ActionLink("Home", "ShowUserHome", "Account")</li>
+                        <li>@Html.ActionLink("Requests", "ShowFriendReqs", "Account")</li>
+                        <li>@Html.ActionLink("Sign Out", "SignOut", "Account")</li>
+                        <li>
+                            <div class="mx-5 mt-3 row">
+                                <input id="searchKey" value=" " placeholder="Find Someone..." class="darkInput col-10" />
+                                <button onclick="search()" class="col-1" style="position:relative;width:20px;left:-35px;top:2px;border:none;background:none;">
+                                    <span class="material-symbols-outlined">search</span>
+                                </button>
+                            </div>
+                        </li>
                         <li>@Html.ActionLink("List Accounts", "List", "Account")</li>
-                        <li>@Html.ActionLink("Search", "Search", "Account")</li>
-                        <li>@Html.ActionLink("Post", "Post", "Account")</li>
-                        <li>@Html.ActionLink("Show Posts", "ShowPosts", "Account")</li>
-                    }
-                </ul>
+
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container-fluid">
+    }
+    <div class="container-fluid mainBody">
         @RenderBody()
         <footer>
             <p>&copy; @DateTime.Now.Year - DeathNote</p>
@@ -60,5 +62,15 @@
     @RenderSection("scripts", required: false)
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script>
+        function search() {
+            var key = document.getElementById("searchKey");
+            if (key.value != "") {
+                window.location.href = "/Account/SearchResult/?keyword=" + key.value.replaceAll(" ", "");
+            }
+        }
+    </script>
+
 </body>
+
 </html>

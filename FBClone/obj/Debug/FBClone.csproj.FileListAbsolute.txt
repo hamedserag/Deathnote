@@ -196,3 +196,4 @@ F:\ASP.NET projects\FBClone\BreadZ\FBClone\obj\Debug\FBClone.csproj.CoreCompileI
 F:\ASP.NET projects\FBClone\BreadZ\FBClone\obj\Debug\FBClone.csproj.CopyComplete
 F:\ASP.NET projects\FBClone\BreadZ\FBClone\obj\Debug\FBClone.dll
 F:\ASP.NET projects\FBClone\BreadZ\FBClone\obj\Debug\FBClone.pdb
+F:\ASP.NET projects\FBClone\BreadZ\FBClone\obj\Debug\FBClone.csproj.AssemblyReference.cache

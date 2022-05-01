@@ -1,0 +1,61 @@
+﻿@model IEnumerable<FBClone.Models.User>
+@{
+    ViewBag.redirect = "UserProfile";
+}
+<table class="table">
+
+
+    @{
+        if (Model != null)
+        {
+            <tr>
+                <th>
+                    Profile Img
+                </th>
+                <th>
+                    Name :
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Mobile)
+                </th>
+                <th></th>
+            </tr>
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img class="smallImg" src="~/UsersMedia/ProfilePictures/@item.ImgUrl" />
+                    </td>
+                    <td>
+                        <a href="/Account/FetchUser/@item.UserId">
+                            @Html.DisplayFor(modelItem => item.FName)
+                            @Html.DisplayFor(modelItem => item.LName)
+                        </a>
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mobile)
+                    </td>
+                </tr>
+            }
+
+
+
+        }
+        else
+        {
+            <tr class="mt-5">
+                <td>
+                    No Results Found for @ViewBag.keyword <a href="/Account/Search">One More Try</a>
+                </td>
+            </tr>
+        }
+    }
+
+</table>

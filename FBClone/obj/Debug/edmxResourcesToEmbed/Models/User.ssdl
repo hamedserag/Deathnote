@@ -6,6 +6,7 @@
     </Key>
     <Property Name="UserId" Type="int" Nullable="false" />
     <Property Name="FriendId" Type="nvarchar(max)" />
+    <Property Name="FriendRequests" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Posts">
     <Key>
@@ -29,10 +30,9 @@
     <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Country" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Mobile" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="FriendRequests" Type="nvarchar(max)" />
     <Property Name="ImgUrl" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Privacy" Type="int" Nullable="false" />
-    <Property Name="TimelineUrl" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ViewModel_Login">
     <Key>

@@ -16,5 +16,6 @@ namespace FBClone.Models
     {
         public int UserId { get; set; }
         public string FriendId { get; set; }
+        public string FriendRequests { get; set; }
     }
 }

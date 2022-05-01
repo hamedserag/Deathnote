@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Friends">
       <EntityTypeMapping TypeName="FBCloneModel.Friend">
         <MappingFragment StoreEntitySet="Friends">
+          <ScalarProperty Name="FriendRequests" ColumnName="FriendRequests" />
           <ScalarProperty Name="FriendId" ColumnName="FriendId" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
         </MappingFragment>
@@ -23,10 +24,9 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="FBCloneModel.User">
         <MappingFragment StoreEntitySet="User">
-          <ScalarProperty Name="TimelineUrl" ColumnName="TimelineUrl" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Privacy" ColumnName="Privacy" />
           <ScalarProperty Name="ImgUrl" ColumnName="ImgUrl" />
-          <ScalarProperty Name="FriendRequests" ColumnName="FriendRequests" />
           <ScalarProperty Name="Mobile" ColumnName="Mobile" />
           <ScalarProperty Name="Country" ColumnName="Country" />
           <ScalarProperty Name="City" ColumnName="City" />

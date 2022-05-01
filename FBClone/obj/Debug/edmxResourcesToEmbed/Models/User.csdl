@@ -12,6 +12,7 @@
     </Key>
     <Property Name="UserId" Type="Int32" Nullable="false" />
     <Property Name="FriendId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FriendRequests" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Post">
     <Key>
@@ -35,10 +36,9 @@
     <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Country" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Mobile" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="FriendRequests" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="ImgUrl" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Privacy" Type="Int32" Nullable="false" />
-    <Property Name="TimelineUrl" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="ViewModel_Login">
     <Key>

@@ -1,43 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using FBClone.Models;
-
+using Newtonsoft.Json;
 
 namespace FBClone.Controllers
 {
     public class AccountController : Controller
     {
+        FBCloneEntities db = new FBCloneEntities();
         //USER PROFILE --------------------------------
         public ActionResult Home()
         {
-            if(Session["UserId"] == null)
+            if (Session["UserId"] == null)
             {
                 return RedirectToAction("Login");
             }
             return View();
         }
-        //ADD POST --------------------------------
         public ActionResult Post()
         {
-            return View();
+            return PartialView("Post");
         }
+        //ADD POST --------------------------------
         [HttpPost]
         public ActionResult Post(Post p)
         {
-            FBCloneEntities db = new FBCloneEntities();
-            p.UserId = (int)Session["UserId"];
-            p.Date = DateTime.Now;
-            p.Privacy = (int)Session["PostPrivacy"];
-            db.Posts.Add(p);
-            db.SaveChanges();
-            return RedirectToAction("ShowPosts");
+
+            if (p.Details != "")
+            {
+                p.UserId = (int)Session["UserId"];
+                p.Date = DateTime.Now;
+                p.Privacy = (int)Session["PostPrivacy"];
+                db.Posts.Add(p);
+                db.SaveChanges();
+            }
+            return View("Post");
         }
         public ActionResult PostPrivacy()
         {
-            FBCloneEntities db = new FBCloneEntities();
+
             int userid = (int)Session["UserId"];
             User u = db.Users.Where(n => n.UserId == userid).FirstOrDefault();
             if (u.Privacy == 0)
@@ -56,8 +61,20 @@ namespace FBClone.Controllers
         }
         public ActionResult ShowPosts()
         {
-            FBCloneEntities db = new FBCloneEntities();
-            return View(db.Posts.ToList());
+            int id = (int)Session["UserId"];
+            List<Post> p = db.Posts.Where(n => n.UserId == id).ToList();
+            p.Reverse();
+            return PartialView(p);
+        }
+        public ActionResult ShowUserHome()
+        {
+            int id = (int)Session["UserId"];
+            Friend userRelations = db.Friends.Where(n => n.UserId == id).FirstOrDefault();
+            string[] friendsId = userRelations.FriendId.Split('#');
+            TempData["friendsUsers"] = db.Users.Where(n => friendsId.Contains(n.UserId.ToString())).ToArray();
+            List<Post> posts = db.Posts.Where(n => friendsId.Contains(n.UserId.ToString())).ToList();
+            posts.Reverse();
+            return View(posts);
         }
         //REGISTER --------------------------------
         public ActionResult SignUp()
@@ -69,7 +86,7 @@ namespace FBClone.Controllers
         {
             if (ModelState.IsValid && user.FName != null && user.LName != null && user.Email != null)
             {
-                FBCloneEntities db = new FBCloneEntities();
+                user.ImgUrl = "DefaultProfile.png";
                 db.Users.Add(user);
                 db.SaveChanges();
                 Friend f = new Friend();
@@ -86,6 +103,28 @@ namespace FBClone.Controllers
             }
         }
         //LOGIN USER --------------------------------
+        public ActionResult ShowOnlineFriends()
+        {
+            int userid = (int)Session["UserId"];
+            Friend f = db.Friends.Where(n => n.UserId == userid).FirstOrDefault();
+            if (f.FriendId != null)
+            {
+
+                string[] friendsId = f.FriendId.Split('#');
+                List<User> friendsUser = new List<User>();
+                for (int i = 0; i < friendsId.Length; i++)
+                {
+                    if (friendsId[i] != "")
+                    {
+                        int userId = Convert.ToInt32(friendsId[i]);
+                        User u = db.Users.Where(n => n.UserId == userId && n.Status != 0).FirstOrDefault();
+                        friendsUser.Add(u);
+                    }
+                }
+                return View(friendsUser);
+            }
+            return View();
+        }
         public ActionResult Login()
         {
             return View();
@@ -93,17 +132,11 @@ namespace FBClone.Controllers
         [HttpPost]
         public ActionResult Login(ViewModel_Login user)
         {
-            FBCloneEntities db = new FBCloneEntities();
 
-            User u = new User();
+            User u = db.Users.Where(n => n.Email == user.Email).FirstOrDefault();
             List<User> users = db.Users.ToList();
-            for (int i = 0; i < users.Count; i++)
-            {
-                if(users[i].Email == user.Email)
-                {
-                    u = users[i];
-                }
-            }
+            u.Status = 1;
+            db.SaveChanges();
             SaveUserSession(u);
             if (u.UserId != 0)
             {
@@ -114,43 +147,50 @@ namespace FBClone.Controllers
                 ViewBag.error = "Something went wrong";
                 return View();
             }
-            
-        }
 
-        //SEARCH AND VIEW OTHER USERS --------------------------------
-        public ActionResult Search()
-        {
-            return View();
         }
-        [HttpPost]
-        public ActionResult Search(string Keyword)
+        public ActionResult SignOut()
         {
-            FBCloneEntities db = new FBCloneEntities();
-            List<User> users = db.Users.ToList();
-            User u = new User();
-            for (int i = 0; i < users.Count; i++)
-            {
-                if (users[i].FName == Keyword || users[i].LName == Keyword || users[i].Email == Keyword || users[i].Mobile == Keyword)
-                {
-                    u = users[i];
-                }
-            }
-            return RedirectToAction("UserProfile",u);
+            int id = (int)Session["UserId"];
+            User u = db.Users.Where(n => n.UserId == id).FirstOrDefault();
+            u.Status = 0;
+            db.SaveChanges();
+            Session.Contents.RemoveAll();
+            return RedirectToAction("Login");
+        }
+        //SEARCH AND VIEW OTHER USERS --------------------------------
+        public ActionResult SearchResult(string keyword)
+        {
+            ViewBag.key = keyword;
+            List<User> users = db.Users.Where(n => n.FName.Contains(keyword) || n.Email.Contains(keyword) || n.LName.Contains(keyword) || n.Mobile.Contains(keyword)).ToList();
+            return View(users);
         }
         public ActionResult UserProfile(User u)
         {
             Session["OtherUser"] = u.UserId;
             return View(u);
         }
+        public ActionResult ShowUserProfilePosts()
+        {
+            int id = (int)Session["OtherUser"];
+            List<Post> p = db.Posts.Where(n => n.UserId == id).ToList();
+            p.Reverse();
+            return PartialView("ShowPosts",p);
+        }
+        public ActionResult FetchUser(int id)
+        {
+            User u = db.Users.Where(n => n.UserId == id).FirstOrDefault();
+            return RedirectToAction("UserProfile", u);
+        }
         //FRIENDS --------------------------------
         public ActionResult ShowFriends()
         {
-            FBCloneEntities db = new FBCloneEntities();
+
             int userid = (int)Session["UserId"];
             Friend f = db.Friends.Where(n => n.UserId == userid).FirstOrDefault();
             if (f.FriendId != null)
             {
-                
+
                 string[] friendsId = f.FriendId.Split('#');
                 List<User> friendsUser = new List<User>();
                 for (int i = 0; i < friendsId.Length; i++)
@@ -172,9 +212,9 @@ namespace FBClone.Controllers
         }
         public ActionResult SendReq()
         {
-            FBCloneEntities db = new FBCloneEntities();
+
             int userid = (int)Session["OtherUser"];
-            User u = db.Users.Where(n => n.UserId == userid).FirstOrDefault();
+            Friend u = db.Friends.Where(n => n.UserId == userid).FirstOrDefault();
             u.FriendRequests += Session["UserId"] + "#";
             db.SaveChanges();
             return RedirectToAction("Home");
@@ -183,7 +223,7 @@ namespace FBClone.Controllers
         {
             if (Session["FriendRequests"] != null)
             {
-                FBCloneEntities db = new FBCloneEntities();
+
                 string tmp = Session["FriendRequests"].ToString();
                 string[] friendRequestsIds = tmp.Split('#');
                 List<User> friendRequestsUsers = new List<User>();
@@ -206,10 +246,10 @@ namespace FBClone.Controllers
         }
         public ActionResult AcceptFriendRequest(int id)
         {
-            FBCloneEntities db = new FBCloneEntities();
+
             int userid = (int)Session["UserId"];
-            User u = db.Users.Where(n => n.UserId == userid).FirstOrDefault();
-            u.FriendRequests = u.FriendRequests.Replace(id+"#", "");
+            Friend u = db.Friends.Where(n => n.UserId == userid).FirstOrDefault();
+            u.FriendRequests = u.FriendRequests.Replace(id + "#", "");
 
             Friend f = db.Friends.Where(n => n.UserId == userid).FirstOrDefault();
             f.FriendId += id + "#";
@@ -218,25 +258,23 @@ namespace FBClone.Controllers
             f.FriendId += userid + "#";
 
             db.SaveChanges();
-            SaveUserSession(u);
 
             return RedirectToAction("ShowFriendReqs");
         }
         public ActionResult RejectFriendRequest(int id)
         {
-            FBCloneEntities db = new FBCloneEntities();
+
             int userid = (int)Session["UserId"];
-            User u = db.Users.Where(n => n.UserId == userid).FirstOrDefault();
+            Friend u = db.Friends.Where(n => n.UserId == userid).FirstOrDefault();
             u.FriendRequests = u.FriendRequests.Replace(id + "#", "");
 
             db.SaveChanges();
-            SaveUserSession(u);
 
             return RedirectToAction("ShowFriendReqs");
         }
         public ActionResult RemoveFriend(int id)
         {
-            FBCloneEntities db = new FBCloneEntities();
+
             int userid = (int)Session["UserId"];
             Friend f = db.Friends.Where(n => n.UserId == userid).FirstOrDefault();
             f.FriendId = f.FriendId.Replace(id + "#", "");
@@ -256,14 +294,14 @@ namespace FBClone.Controllers
             {
                 img.SaveAs(Server.MapPath("~/UsersMedia/ProfilePictures/" + img.FileName));
 
-                FBCloneEntities db = new FBCloneEntities();
+
                 int userid = (int)Session["UserId"];
                 User u = db.Users.Where(n => n.UserId == userid).FirstOrDefault();
                 u.ImgUrl = img.FileName;
                 db.SaveChanges();
                 SaveUserSession(u);
 
-                ViewBag.error = "Success " + userid + " IMG URL "+u.ImgUrl ;
+                ViewBag.error = "Success " + userid + " IMG URL " + u.ImgUrl;
                 return RedirectToAction("Home");
             }
             else
@@ -271,7 +309,7 @@ namespace FBClone.Controllers
                 ViewBag.error = "Null Img";
                 return View();
             }
-           
+
         }
 
         //HELPING FUNCTIONS --------------------------------
@@ -284,21 +322,36 @@ namespace FBClone.Controllers
             Session["Country"] = u.Country;
             Session["Email"] = u.Email;
             Session["Mobile"] = u.Mobile;
-            Session["FriendRequests"] = u.FriendRequests;
             Session["UserId"] = u.UserId;
             Session["Password"] = u.Password;
             Session["UserImg"] = u.ImgUrl;
             Session["PostPrivacy"] = u.Privacy;
-            Session["TimelineImg"] = u.TimelineUrl;
         }
 
         //EXTRA FUNCTIONS --------------------------------
         public ActionResult List()
         {
-            FBCloneEntities db = new FBCloneEntities();
+
             List<User> users = db.Users.ToList();
             return View(users);
         }
 
+        public class HttpParamActionAttribute : ActionNameSelectorAttribute
+        {
+            public override bool IsValidName(ControllerContext controllerContext, string actionName, MethodInfo methodInfo)
+            {
+                if (actionName.Equals(methodInfo.Name, StringComparison.InvariantCultureIgnoreCase))
+                    return true;
+
+                if (!actionName.Equals("Action", StringComparison.InvariantCultureIgnoreCase))
+                    return false;
+
+                var request = controllerContext.RequestContext.HttpContext.Request;
+                return request[methodInfo.Name] != null;
+            }
+        }
+
     }
+
+
 }

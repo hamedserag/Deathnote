@@ -1,21 +1,28 @@
 ﻿@model FBClone.Models.Post
-
+<style>
+    .postContent {
+        background: #2C2C2E;
+        border-radius: 8px;
+    }
+    .my-auto{
+        margin-top:auto;
+        margin-bottom:auto;
+    }
+</style>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Details, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <textarea id="summernote" name="Details"></textarea>
-                @Html.ValidationMessageFor(model => model.Details, "", new { @class = "text-danger" })
-            </div>
+    <div class="row py-4 px-2 postContent justify-content-around">
+        <div class="col-1">
+            <img class="smallImg" src="~/UsersMedia/ProfilePictures/@Session["UserImg"]" alt="Alternate Text" />
         </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Post" class="btn btn-default" />
+        <div class="col-10 d-flex align-items-center">
+            <div class="input-group d-flex">
+                @Html.EditorFor(model => model.Details, new { htmlAttributes = new { @class = "darkInput col-11", @placeholder = "What's on your mind..." } })
+                <div class="input-group-append col-1">
+                    <button class="btn darkBtn" name="Post" type="submit" style="border-radius:0 8px 8px 0;">Post</button>
+                </div>
             </div>
         </div>
     </div>
