@@ -92,7 +92,9 @@ namespace FBClone.Controllers
                 Friend f = new Friend();
                 f.UserId = user.UserId;
                 f.FriendId = null;
+                f.FriendRequests = null;
                 db.Friends.Add(f);
+                db.SaveChanges();
                 SaveUserSession(user);
                 return RedirectToAction("Home");
             }
@@ -210,15 +212,7 @@ namespace FBClone.Controllers
             }
             return View();
         }
-        public ActionResult SendReq()
-        {
-
-            int userid = (int)Session["OtherUser"];
-            Friend u = db.Friends.Where(n => n.UserId == userid).FirstOrDefault();
-            u.FriendRequests += Session["UserId"] + "#";
-            db.SaveChanges();
-            return RedirectToAction("Home");
-        }
+        
         public ActionResult ShowFriendReqs()
         {
             if (Session["FriendRequests"] != null)
@@ -243,6 +237,15 @@ namespace FBClone.Controllers
                 ViewBag.error = "No New Friend Requests";
             }
             return View();
+        }
+        public ActionResult SendReq()
+        {
+
+            int userid = (int)Session["OtherUser"];
+            Friend u = db.Friends.Where(n => n.UserId == userid).FirstOrDefault();
+            u.FriendRequests += Session["UserId"] + "#";
+            db.SaveChanges();
+            return RedirectToAction("Home");
         }
         public ActionResult AcceptFriendRequest(int id)
         {
