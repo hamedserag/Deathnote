@@ -6,55 +6,24 @@
 
 
     @{
-        if (Model != null)
+
+        foreach (var item in Model)
         {
-            <tr>
-                <th>
-                    Profile Img
-                </th>
-                <th>
-                    Name :
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Email)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Mobile)
-                </th>
-                <th></th>
-            </tr>
-            foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        <img class="smallImg" src="~/UsersMedia/ProfilePictures/@item.ImgUrl" />
-                    </td>
-                    <td>
-                        <a href="/Account/FetchUser/@item.UserId">
-                            @Html.DisplayFor(modelItem => item.FName)
-                            @Html.DisplayFor(modelItem => item.LName)
-                        </a>
-
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Mobile)
-                    </td>
-                </tr>
-            }
-
-
-
+            <div class="row py-4 px-2 justify-content-around">
+                <a href="/Account/FetchUser/@item.UserId" class="col-4">
+                    <div class="col-12 d-flex align-items-center">
+                        <img class="smallImg" src="~/UsersMedia/ProfilePictures/@Html.DisplayFor(modelItem => item.ImgUrl)" alt="Alternate Text" />
+                        <p class="mx-4"> @Html.DisplayFor(modelItem => item.FName) @Html.DisplayFor(modelItem => item.LName) </p>
+                    </div>
+                </a>
+                <div class="col-3 d-flex align-items-center">
+                    @Html.ActionLink("Send Friend Request", "RemoveFriend", new { id = item.UserId }, new { @class = "lightBtn mx-3" })
+                </div>
+            </div>
         }
-        else
+        if (!Model.Any())
         {
-            <tr class="mt-5">
-                <td>
-                    No Results Found for @ViewBag.keyword <a href="/Account/Search">One More Try</a>
-                </td>
-            </tr>
+            <p>No Results Found for @ViewBag.keyword<a href="/Account/Search"> One More Try</a></p>
         }
     }
 

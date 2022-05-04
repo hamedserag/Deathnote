@@ -23,7 +23,21 @@
             <div class="col-12">
                 <a href="/Account/ChangeImage"> <img class="profile" src="~/UsersMedia/ProfilePictures/@Model.ImgUrl " alt="Alternate Text" /> </a>
             </div>
-            <button class="col-12 my-3 lightBtn"> Edit </button>
+            @if (ViewBag.relation == "fri")
+            {
+                <button class="col-12 my-3 lightBtn"> Friends </button>
+            }
+            else if (ViewBag.relation == "unk")
+            {
+                <a href="/Account/SendReq">
+                    <button class="col-12 my-3 lightBtn"> Add Friend </button>
+                </a>
+                
+            }
+            else
+            {
+                <button class="col-12 my-3 lightBtn"> Request Sent </button>
+            }
             <div class="col-12 mt-3 profileData">
                 <p><img class="profileIcon" src="~/Media/name.png" alt="Name" /> @Model.FName @Model.LName</p>
                 <p><img class="profileIcon" src="~/Media/city.png" alt="Place" /> @Model.Country, @Model.City</p>

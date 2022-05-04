@@ -29,5 +29,6 @@ namespace FBClone.Models
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<ViewModel_Login> ViewModel_Login { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
     }
 }

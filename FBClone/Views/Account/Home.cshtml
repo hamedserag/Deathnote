@@ -22,7 +22,9 @@
             <div class="col-12">
                 <a href="/Account/ChangeImage"> <img class="profile" src="~/UsersMedia/ProfilePictures/@Session["UserImg"] " alt="Alternate Text" /> </a>
             </div>
-            <button class="col-12 my-3 lightBtn"> Edit </button>
+            <a>
+                <button onclick="showEditInfo()" class="col-12 my-3 lightBtn"> Edit </button>
+            </a>
             <div class="col-12 mt-3 profileData">
                 <p><img class="profileIcon" src="~/Media/name.png" alt="Name" /> @Session["FName"] @Session["LName"]</p>
                 <p><img class="profileIcon" src="~/Media/city.png" alt="Place" /> @Session["Country"], @Session["City"]</p>
@@ -31,7 +33,7 @@
                 <p> @Html.ActionLink("Friends","ShowFriends","Account") </p>
             </div>
         </div>
-        <div class="col-8 offset-1">
+        <div class="col-8 offset-1" id="profileWall">
             <div class="col-12" id="Post">
                 @Html.Action("Post", "Account")
             </div>
@@ -42,6 +44,8 @@
     </div>
 </div>
 <script>
-
+    function showEditInfo() {
+        $("#profileWall").load("/Account/EditInfo");
+    }
 </script>
 

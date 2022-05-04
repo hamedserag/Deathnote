@@ -13,6 +13,10 @@
     <EntitySetMapping Name="Posts">
       <EntityTypeMapping TypeName="FBCloneModel.Post">
         <MappingFragment StoreEntitySet="Posts">
+          <ScalarProperty Name="DislikesId" ColumnName="DislikesId" />
+          <ScalarProperty Name="LikesId" ColumnName="LikesId" />
+          <ScalarProperty Name="Dislikes" ColumnName="Dislikes" />
+          <ScalarProperty Name="Likes" ColumnName="Likes" />
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="Privacy" ColumnName="Privacy" />
           <ScalarProperty Name="Details" ColumnName="Details" />
@@ -44,6 +48,17 @@
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="FBCloneModel.Comment">
+        <MappingFragment StoreEntitySet="Comments">
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="PostId" ColumnName="PostId" />
+          <ScalarProperty Name="CommentId" ColumnName="CommentId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

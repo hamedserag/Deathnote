@@ -12,16 +12,12 @@ namespace FBClone.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Post
+    public partial class Comment
     {
-        public int PostId { get; set; }
-        public Nullable<int> UserId { get; set; }
+        public int CommentId { get; set; }
+        public string PostId { get; set; }
+        public string UserId { get; set; }
         public string Details { get; set; }
-        public Nullable<int> Privacy { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
-        public int Likes { get; set; }
-        public int Dislikes { get; set; }
-        public string LikesId { get; set; }
-        public string DislikesId { get; set; }
     }
 }

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<FBClone.Models.Comment>
+
+@{
+    var friendsUsers = (FBClone.Models.User[])TempData["commentingUsers"];
+    var dict = new Dictionary<string, FBClone.Models.User>(); ;
+    if (friendsUsers != null)
+    {
+
+        for (int i = 0; i < friendsUsers.Length; i++)
+        {
+            dict.Add(friendsUsers[i].UserId.ToString(), friendsUsers[i]);
+        }
+    }
+}
+
+@if (friendsUsers != null)
+{
+    <div class="container greyPanel mt-4">
+        @foreach (var item in Model)
+        {
+            <div class="row justify-content-around py-4 px-2 mt-4">
+                <div class="col-1">
+                    <img class="smallImg" src="~/UsersMedia/ProfilePictures/@dict[item.UserId].ImgUrl" alt="Alternate Text" />
+                </div>
+                <div class="col-10 d-flex align-models-center">
+                    <div class="input-group d-flex">
+                        <h4>@dict[item.UserId].FName @dict[item.UserId].LName</h4>
+                    </div>
+                </div>
+                <div class="col-lg-11 justify-content-center">
+                    <p> @Html.DisplayFor(modelItem => item.Details)</p>
+                </div>
+                <div class="col-12 text-right">
+                    <p style="color:#87878A;"> @Html.DisplayFor(modelItem => item.Date)</p>
+                </div>
+            </div>
+        }
+        @if (!Model.Any())
+        {
+        <p class="text-center">No Comments on this post yet <br /> Be the first to comment and start a discussion</p>
+        }
+    </div>
+
+}
+

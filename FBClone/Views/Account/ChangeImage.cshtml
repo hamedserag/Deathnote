@@ -1,14 +1,29 @@
 ﻿@model FBClone.Models.User
-
+<style>
+    .fileInput {
+        color: transparent;
+    }
+        .fileInput::-webkit-file-upload-button {
+            background: #F2F2F7;
+            color: #000;
+            border-radius: 8px;
+            border: none;
+            padding: 8px 10px;
+        }
+</style>
 <h2 class="text-center">ChangeImage</h2>
 
 <form action="ChangeImage" method="post" enctype="multipart/form-data">
-    <div class="row justify-content-center">
-        <input class="col-2" type="file" name="img" value="file" />
-        <button class="buttonDefault btn col-2 login_btn" type="submit">Change Photo</button>
-
+    <div class="row justify-content-center align-items-center">
+        <div class="col-1">
+            <img class="smallImgSquare" src="~/UsersMedia/ProfilePictures/@Session["UserImg"]" alt="Alternate Text" />
+        </div>
+        <input class="col-2 fileInput" type="file" name="img" value="file" />
+        <div class="col-2 d-flex align-items-center">
+            <button class="w-100 lightBtn" type="submit">Change Photo</button>
+        </div>
+        
     </div>
-    @ViewBag.error
 </form>
 
 @section Scripts {

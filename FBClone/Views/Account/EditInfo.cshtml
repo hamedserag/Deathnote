@@ -1,12 +1,12 @@
 ﻿@model FBClone.Models.User
 <link href="~/Content/Style/LoginReg.css" rel="stylesheet" />
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <div class="RegisterFormContent container p-5">
+
+    <div class="whitePanel container p-5 mt-5 w-100">
         <div class="row">
-            <p class="darkTxt">Create Your First Account!</p>
+            <p class="darkTxt">Edit your profile!</p>
         </div>
         <div class="row my-2">
             <span class="col-6">
@@ -21,16 +21,12 @@
             @Html.ValidationMessageFor(model => model.LName, "", new { @class = "text-danger" })
         </div>
         <div class="row my-2">
-            <span class="col-6">
+            <span class="col-12">
                 @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "lightInput regInput", @placeholder = "Email Address" } })
-            </span>
-            <span class="col-6">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "lightInput regInput", @placeholder = "Password" } })
             </span>
         </div>
         <div class="row">
-            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger col-6" })
-            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger col-6" })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger col-12" }) 
         </div>
         <div class="row my-2">
             <span class="col-3">
@@ -50,15 +46,11 @@
         </div>
         <div class="row mt-3 justify-content-end">
             <button type="submit" class="btn darkBtn float-right col-6">
-                Create Account
+                Save
                 <span class="material-symbols-outlined" style="vertical-align:-30%;">
                     chevron_right
                 </span>
             </button>
         </div>
     </div>
-}
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 }

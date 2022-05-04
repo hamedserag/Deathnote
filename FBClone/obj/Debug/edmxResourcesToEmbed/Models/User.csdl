@@ -5,6 +5,7 @@
     <EntitySet Name="Posts" EntityType="FBCloneModel.Post" />
     <EntitySet Name="Users" EntityType="FBCloneModel.User" />
     <EntitySet Name="ViewModel_Login" EntityType="FBCloneModel.ViewModel_Login" />
+    <EntitySet Name="Comments" EntityType="FBCloneModel.Comment" />
   </EntityContainer>
   <EntityType Name="Friend">
     <Key>
@@ -23,6 +24,10 @@
     <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Privacy" Type="Int32" />
     <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="Likes" Type="Int32" Nullable="false" />
+    <Property Name="Dislikes" Type="Int32" Nullable="false" />
+    <Property Name="LikesId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DislikesId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -47,5 +52,15 @@
     <Property Name="Id" Type="Int32" Nullable="false" />
     <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="CommentId" />
+    </Key>
+    <Property Name="CommentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PostId" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Details" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
   </EntityType>
 </Schema>

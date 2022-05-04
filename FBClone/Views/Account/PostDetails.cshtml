@@ -1,0 +1,73 @@
+﻿@model FBClone.Models.Post
+
+
+
+<div class="row post px-5 py-3 mt-3 postContent">
+
+    <div class="row justify-content-around py-4 px-2 ">
+        <div class="col-1">
+            <img class="smallImg" src="~/UsersMedia/ProfilePictures/@Session["UserImg"]" alt="Alternate Text" />
+        </div>
+        <div class="col-10 d-flex align-models-center">
+            <div class="input-group d-flex">
+                <h4>@Session["FName"] @Session["LName"]</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row postDetails">
+        @Html.DisplayFor(model => model.Details)
+    </div>
+    <div class="row justify-content-between mt-3">
+        <span class="postLikes col" style="color:#87878A;"> @Html.DisplayFor(model => model.Likes) Apples  @Html.DisplayFor(model => model.Likes) Deaths</span>
+        <p class="text-right col" style="color:#87878A;"> @Html.DisplayFor(model => model.Date) </p>
+        <hr />
+    </div>
+    <div class="row justify-content-around">
+        <div class="col-2">
+            <a class="postControl" href="/Account/LikePost/?postId=@Html.DisplayFor(model => model.PostId)">
+                <img class="postIcon" src="~/Media/apple.png" alt="" />
+                <p>Give Apple</p>
+            </a>
+        </div>
+        <div class="col-2">
+            <a class="postControl" href="/Account/PostDetails/?postId=@Html.DisplayFor(model => model.PostId)">
+                <img class="postIcon" src="~/Media/comment.png" alt="" />
+                <p>Comment</p>
+            </a>
+        </div>
+        <div class="col-2">
+            <a class="postControl" href="/Account/DislikePost/?postId=@Html.DisplayFor(model => model.PostId)">
+                <img class="postIcon" src="~/Media/writename.png" alt="" />
+                <p>Write Name</p>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div id="cmtSection">
+    @Html.Action("CommentSection", "Account")
+</div>
+
+<div class="container">
+    <div class="row py-4 px-2 postContent justify-content-around mt-5">
+        <div class="col-1">
+            <img class="smallImg" src="~/UsersMedia/ProfilePictures/@Session["UserImg"]" alt="Alternate Text" />
+        </div>
+        <div class="col-10 d-flex align-models-center">
+            <div class="input-group d-flex">
+                @Html.EditorFor(model => model.Details, new { htmlAttributes = new { @class = "darkInput col-11", @placeholder = "Write Comment...", @id = "cmt" } })
+                <div class="input-group-append col-1">
+                    <button onclick="comment()" class="darkBtn" name="Comment" type="submit" style="border-radius:0 8px 8px 0; height:100%;">Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function comment() {
+
+            var cmt = document.getElementById("cmt");
+            window.location.href = "/Account/Comment/?cmt=" + cmt.value;
+        }
+    </script>
+</div>

@@ -133,6 +133,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Comment.cs">
+      <DependentUpon>User.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Friend.cs">
       <DependentUpon>User.tt</DependentUpon>
     </Compile>
@@ -236,6 +239,9 @@
     <Content Include="Views\Account\ShowOnlineFriends.cshtml" />
     <Content Include="Views\Account\ShowPosts.cshtml" />
     <Content Include="Views\Account\ShowUserHome.cshtml" />
+    <Content Include="Views\Account\EditInfo.cshtml" />
+    <Content Include="Views\Account\PostDetails.cshtml" />
+    <Content Include="Views\Account\CommentSection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
