@@ -24,19 +24,19 @@
     </div>
     <div class="row justify-content-around">
         <div class="col-2">
-            <a class="postControl" href="/Account/LikePost/?postId=@Html.DisplayFor(model => model.PostId)">
+            <a class="postControl" href="/Post/LikePost/?postId=@Html.DisplayFor(model => model.PostId)">
                 <img class="postIcon" src="~/Media/apple.png" alt="" />
                 <p>Give Apple</p>
             </a>
         </div>
         <div class="col-2">
-            <a class="postControl" href="/Account/PostDetails/?postId=@Html.DisplayFor(model => model.PostId)">
+            <a class="postControl" href="/Post/PostDetails/?postId=@Html.DisplayFor(model => model.PostId)">
                 <img class="postIcon" src="~/Media/comment.png" alt="" />
                 <p>Comment</p>
             </a>
         </div>
         <div class="col-2">
-            <a class="postControl" href="/Account/DislikePost/?postId=@Html.DisplayFor(model => model.PostId)">
+            <a class="postControl" href="/Post/DislikePost/?postId=@Html.DisplayFor(model => model.PostId)">
                 <img class="postIcon" src="~/Media/writename.png" alt="" />
                 <p>Write Name</p>
             </a>
@@ -45,7 +45,7 @@
 </div>
 
 <div id="cmtSection">
-    @Html.Action("CommentSection", "Account")
+    @Html.Action("CommentSection", "Post")
 </div>
 
 <div class="container">
@@ -67,7 +67,7 @@
         function comment() {
 
             var cmt = document.getElementById("cmt");
-            window.location.href = "/Account/Comment/?cmt=" + cmt.value;
+            window.location.href = "/Post/Comment/?cmt=" + cmt.value;
         }
     </script>
 </div>

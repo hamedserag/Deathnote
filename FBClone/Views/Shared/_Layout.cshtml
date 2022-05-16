@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/4ec68ea5bd.js" crossorigin="anonymous"></script>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/Style/global.css" rel="stylesheet" />
@@ -32,7 +33,7 @@
                     <ul class="nav navbar-nav d-inline">
                         <li>@Html.ActionLink("Profile", "Home", "Account")</li>
                         <li>@Html.ActionLink("Home", "ShowUserHome", "Account")</li>
-                        <li>@Html.ActionLink("Requests", "ShowFriendReqs", "Account")</li>
+                        <li>@Html.ActionLink("Requests", "ShowFriendReqs", "Friends")</li>
                         <li>@Html.ActionLink("Sign Out", "SignOut", "Account")</li>
                         <li>
                             <div class="mx-5 mt-3 row">
@@ -50,6 +51,7 @@
         </div>
     }
     <div class="container-fluid mainBody">
+        <p style="color:red;">@ViewBag.error</p>
         @RenderBody()
         <footer>
             <p>&copy; @DateTime.Now.Year - DeathNote</p>
@@ -65,7 +67,7 @@
         function search() {
             var key = document.getElementById("searchKey");
             if (key.value != "") {
-                window.location.href = "/Account/SearchResult/?keyword=" + key.value.replaceAll(" ", "");
+                window.location.href = "/Search/SearchResult/?keyword=" + key.value.replaceAll(" ", "");
             }
         }
     </script>

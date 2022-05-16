@@ -129,7 +129,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\FriendsController.cs" />
+    <Compile Include="Controllers\PostController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -231,17 +233,19 @@
     <Content Include="Views\Account\SignUp.cshtml" />
     <Content Include="Views\Account\Home.cshtml" />
     <Content Include="Views\Account\ChangeImage.cshtml" />
-    <Content Include="Views\Account\UserProfile.cshtml" />
-    <Content Include="Views\Account\ShowFriendReqs.cshtml" />
-    <Content Include="Views\Account\ShowFriends.cshtml" />
-    <Content Include="Views\Account\Post.cshtml" />
-    <Content Include="Views\Account\SearchResult.cshtml" />
-    <Content Include="Views\Account\ShowOnlineFriends.cshtml" />
-    <Content Include="Views\Account\ShowPosts.cshtml" />
+    <Content Include="Views\Search\UserProfile.cshtml" />
+    <Content Include="Views\Friends\ShowFriendReqs.cshtml" />
+    <Content Include="Views\Friends\ShowFriends.cshtml" />
+    <Content Include="Views\Post\Post.cshtml" />
+    <Content Include="Views\Search\SearchResult.cshtml" />
+    <Content Include="Views\Friends\ShowOnlineFriends.cshtml" />
+    <Content Include="Views\Post\ShowPosts.cshtml" />
     <Content Include="Views\Account\ShowUserHome.cshtml" />
     <Content Include="Views\Account\EditInfo.cshtml" />
-    <Content Include="Views\Account\PostDetails.cshtml" />
-    <Content Include="Views\Account\CommentSection.cshtml" />
+    <Content Include="Views\PostDetails.cshtml" />
+    <Content Include="Views\Post\CommentSection.cshtml" />
+    <Content Include="Views\Search\ShowUserProfilePosts.cshtml" />
+    <Content Include="Views\Post\PostDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

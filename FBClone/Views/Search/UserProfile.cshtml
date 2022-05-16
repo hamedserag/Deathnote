@@ -29,7 +29,7 @@
             }
             else if (ViewBag.relation == "unk")
             {
-                <a href="/Account/SendReq">
+                <a href="/Friends/SendReq">
                     <button class="col-12 my-3 lightBtn"> Add Friend </button>
                 </a>
                 
@@ -47,7 +47,7 @@
         </div>
         <div class="col-8 offset-1">
             <div class="col-12 mt-5" id="ShowPosts">
-                @Html.Action("ShowUserProfilePosts", "Account")
+                @Html.Action("ShowUserProfilePosts")
             </div>
         </div>
     </div>

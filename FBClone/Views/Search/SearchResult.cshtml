@@ -10,7 +10,7 @@
         foreach (var item in Model)
         {
             <div class="row py-4 px-2 justify-content-around">
-                <a href="/Account/FetchUser/@item.UserId" class="col-4">
+                <a href="/Search/FetchUser/@item.UserId" class="col-4">
                     <div class="col-12 d-flex align-items-center">
                         <img class="smallImg" src="~/UsersMedia/ProfilePictures/@Html.DisplayFor(modelItem => item.ImgUrl)" alt="Alternate Text" />
                         <p class="mx-4"> @Html.DisplayFor(modelItem => item.FName) @Html.DisplayFor(modelItem => item.LName) </p>
@@ -23,7 +23,7 @@
         }
         if (!Model.Any())
         {
-            <p>No Results Found for @ViewBag.keyword<a href="/Account/Search"> One More Try</a></p>
+            <p>No Results Found for @ViewBag.keyword<a href="/Search/Search"> One More Try</a></p>
         }
     }
 

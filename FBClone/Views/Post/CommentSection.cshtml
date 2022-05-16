@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<FBClone.Models.Comment>
 
 @{
+    Layout = null;
     var friendsUsers = (FBClone.Models.User[])TempData["commentingUsers"];
     var dict = new Dictionary<string, FBClone.Models.User>(); ;
     if (friendsUsers != null)
